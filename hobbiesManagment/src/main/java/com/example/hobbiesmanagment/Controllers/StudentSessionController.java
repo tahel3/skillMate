@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/sessions")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+// CORS is configured globally in SecurityConfig
 public class StudentSessionController {
 
     private final StudentSessionService studentSessionService;

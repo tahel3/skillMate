@@ -17,6 +17,7 @@ import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutlined";
 import "./Chat.css";
+import { API_URL } from "../config";
 
 /* ─────────────────────────────────────────────
    Helpers
@@ -138,7 +139,7 @@ function MessageThread({ currentUserId, recipient }) {
     if (!currentUserId) return;
 
     const client = new Client({
-      webSocketFactory: () => new SockJS("http://localhost:8080/ws-chat"),
+      webSocketFactory: () => new SockJS(`${API_URL}/ws-chat`),
       reconnectDelay: 5000,
       onConnect: () => {
         setConnected(true);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../hooks/useHooks";
+import { useAuth } from "../hooks/UseHooks";
 import { useNavigate } from "react-router-dom";
 import {
   useGetMentorSessionsQuery,

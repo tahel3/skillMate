@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useGetMyMentorProfileQuery, useGetSkillsByMentorQuery } from "../api/Api";
+import { API_URL } from "../config";
 
 const LEVELS = ["BEGINNER", "ADVANCED", "EXPERT"];
 const CATEGORIES = ["Singing", "Programming", "Fitness", "Ball games", "Painting", "Cooking", "Baking", "Planning"];
@@ -68,7 +69,7 @@ const MySkillsPage = () => {
       setSavingId(skill.id);
       setMessage(null);
       const token = sessionStorage.getItem("token");
-      const response = await fetch(`http://localhost:8080/api/skill/${skill.id}`, {
+      const response = await fetch(`${API_URL}/api/skill/${skill.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

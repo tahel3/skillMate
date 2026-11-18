@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Profile.css';
+import { API_URL } from "../config";
 
 const Profile = () => {
     const [user, setUser] = useState(null);
@@ -14,7 +15,7 @@ const Profile = () => {
             return;
         }
 
-        fetch(`http://localhost:8080/api/users/${userId}`, {
+        fetch(`${API_URL}/api/users/${userId}`, {
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`
             }
@@ -53,7 +54,7 @@ const Profile = () => {
 
         console.log("Sending update payload:", payload);
 
-        fetch(`http://localhost:8080/api/users/${user.idNumber}`, {
+        fetch(`${API_URL}/api/users/${user.idNumber}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
