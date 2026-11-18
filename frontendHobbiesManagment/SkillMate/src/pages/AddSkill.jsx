@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, TextField, MenuItem, Button, CircularProgress, Typography, Paper, InputAdornment } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import './AddSkill.css';
+import { API_URL } from "../config";
 
 const CATEGORIES = ["Singing", "Programming", "Fitness", "Ball games", "Painting", "Cooking", "Baking", "Planning"];
 
@@ -36,7 +37,7 @@ const handleSubmit = async (e) => {
     const payload = { ...formData, cost: parseFloat(formData.cost) || 0.0 };
 
     try {
-      const response = await fetch('http://localhost:8080/api/mentors/my-skills', {
+      const response = await fetch(`${API_URL}/api/mentors/my-skills`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

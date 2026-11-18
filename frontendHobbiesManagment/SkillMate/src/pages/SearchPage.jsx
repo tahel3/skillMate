@@ -19,6 +19,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import dayjs from "dayjs";
 import AiAdvisor from "../components/AiAdvisor";
 import "./SearchPage.css";
+import { API_URL } from "../config";
 
 const CATEGORIES = ["Singing", "Programming", "Fitness", "Ball games", "Painting", "Cooking", "Baking", "Planning"];
 
@@ -76,7 +77,7 @@ export const SearchPage = () => {
       const results = await Promise.all(
         uniqueMentorIds.map(async (mentorId) => {
           try {
-            const response = await fetch(`http://localhost:8080/api/mentors/${mentorId}/available-dates`);
+            const response = await fetch(`${API_URL}/api/mentors/${mentorId}/available-dates`);
             if (!response.ok) return [mentorId, null];
             const payload = await response.json();
             return [mentorId, payload];

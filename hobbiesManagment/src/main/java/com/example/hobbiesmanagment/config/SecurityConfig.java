@@ -1,5 +1,6 @@
 package com.example.hobbiesmanagment.config;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,12 +11,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
 public class SecurityConfig {
     @Autowired
     private com.example.hobbiesmanagment.Jwt.JwtFilter jwtFilter;
+
+    // Extra allowed origins for production, comma separated (e.g. https://skillmate.vercel.app)
+    @Value("${app.cors.allowed-origins:}")
+    private String extraAllowedOrigins;
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -31,10 +38,15 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration corsConfiguration = new CorsConfiguration();
-                    corsConfiguration.setAllowedOriginPatterns(List.of(
+                    List<String> origins = new ArrayList<>(List.of(
                             "http://localhost:*",
                             "http://127.0.0.1:*"
                     ));
+                    Arrays.stream(extraAllowedOrigins.split(","))
+                            .map(String::trim)
+                            .filter(o -> !o.isEmpty())
+                            .forEach(origins::add);
+                    corsConfiguration.setAllowedOriginPatterns(origins);
                     corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfiguration.setAllowedHeaders(List.of("*"));
                     corsConfiguration.setAllowCredentials(true);

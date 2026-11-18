@@ -1,0 +1,32 @@
+# Copy this file to application.properties and fill in your own values.
+spring.application.name=hobbiesManagment
+
+# --- Database: H2 file database (created automatically in ./data) ---
+spring.datasource.url=jdbc:h2:file:./data/hobbiesdb;AUTO_SERVER=TRUE
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+# H2 web console (development only) -> http://localhost:8080/h2-console
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+# --- JWT: use a random string of at least 32 characters ---
+jwt.secret=CHANGE_ME_to_a_random_string_of_at_least_32_chars
+
+# --- Email notifications (Gmail SMTP with an App Password) ---
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=your-email@gmail.com
+spring.mail.password=your-app-password
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+
+# --- AI Skill Advisor (OpenRouter, free tier) -> https://openrouter.ai/keys ---
+openrouter.api.key=YOUR_OPENROUTER_API_KEY
+
+# --- CORS: production frontend domain(s), comma separated (localhost is always allowed) ---
+app.cors.allowed-origins=

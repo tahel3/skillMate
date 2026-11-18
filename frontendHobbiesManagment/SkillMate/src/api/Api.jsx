@@ -1,13 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
+import { API_URL } from "../config";
+
 
 export const api = createApi({
   reducerPath: "api",
   refetchOnFocus: true,     
   refetchOnReconnect: true, 
   baseQuery: fetchBaseQuery({ 
-    baseUrl: "http://localhost:8080/api",
+    baseUrl: `${API_URL}/api`,
     prepareHeaders: (headers) => {
       const token = sessionStorage.getItem("token"); 
       if (token) {
@@ -161,7 +163,7 @@ getMentorSessions: builder.query({
       providesTags: ["Notifications"],
       async onCacheEntryAdded(userId, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
         const stompClient = new Client({
-          webSocketFactory: () => new SockJS("http://localhost:8080/ws-chat"),
+          webSocketFactory: () => new SockJS(`${API_URL}/ws-chat`),
           reconnectDelay: 5000,
         });
         try {
@@ -195,7 +197,7 @@ getMentorSessions: builder.query({
   providesTags: ["Messages"],
   async onCacheEntryAdded({ userId1 }, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
     const stompClient = new Client({
-      webSocketFactory: () => new SockJS("http://localhost:8080/ws-chat"),
+      webSocketFactory: () => new SockJS(`${API_URL}/ws-chat`),
       reconnectDelay: 5000,
     });
     try {

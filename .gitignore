@@ -23,3 +23,8 @@ hobbiesManagment/src/main/resources/application.properties
 *.njsproj
 *.sln
 *.sw?
+
+# Local H2 database files
+hobbiesManagment/data/
+*.mv.db
+*.trace.db

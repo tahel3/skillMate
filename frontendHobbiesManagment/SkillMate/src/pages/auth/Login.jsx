@@ -6,7 +6,7 @@ import { useLoginMutation } from "../../api/Api";
 import { setCredentials } from "../../features/AuthSlice";
 import { Link } from "react-router-dom";
 import "./Login.css";
-import { notifyAuthChanged } from "../../hooks/useHooks";
+import { notifyAuthChanged } from "../../hooks/UseHooks";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
